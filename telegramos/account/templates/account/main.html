@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      type="text/css"
+      href="{% static 'account/css/style.css' %}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header"></header>
+    <div class="basis">
+      <div class="logo__container">
+        <div class="telegram">Telegram</div>
+        <img id="gif1" src="{% static 'account/img/o_light.gif' %}" alt="o" />
+        <img id="gif2" src="{% static 'account/img/s_light.gif' %}" alt="s" />
+      </div>
+      <div class="desc">
+        <p>Crypto & IT Services</p>
+      </div>
+      <div class="desc1">
+        <p>Marketplace</p>
+      </div>
+      <div class="secret--key">0x542a2dF2e395C3F30E6</div>
+      <div class="fire--container--main">
+        <img
+          id="fire1"
+          src="{% static 'account/img/fire_light.gif' %}"
+          alt="fire"
+        />
+        <div class="trending">
+          <p>ETH Trending</p>
+        </div>
+        <img
+          id="fire1"
+          src="{% static 'account/img/fire_light.gif' %}"
+          alt="fire"
+        />
+      </div>
+      <div class="tocens_container">
+        <p>1.FTB 2.ETH 3.VOLT</p>
+      </div>
+      <div class="services__container">
+        <p>Services</p>
+      </div>
+      <div class="launches__container">
+        <p>Next Launches</p>
+      </div>
+      <div class="account--container">
+        <dic class="account--button">
+          <a href="#" id="account">account</a>
+        </dic>
+      </div>
+      <div class="theme_container">
+        <div class="theme">
+          <a href="#" id="themeToggle">Dark</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const themeToggle = document.getElementById("themeToggle");
+        const body = document.body;
+        const gif1 = document.getElementById("gif1");
+        const gif2 = document.getElementById("gif2");
+        const fire1 = document.getElementById("fire1");
+        const fire2 = document.getElementById("fire2");
+
+        themeToggle.addEventListener("click", function () {
+          body.classList.toggle("dark");
+          body.classList.toggle("light");
+          const currentTheme = body.classList.contains("dark")
+            ? "Light"
+            : "Dark";
+          themeToggle.textContent = `${currentTheme}`;
+
+          if (currentTheme === "Dark") {
+            gif1.src = "{% static 'account/img/o_light.gif' %}";
+            gif2.src = "{% static 'account/img/s_light.gif' %}";
+          } else {
+            gif1.src = "{% static 'account/img/o_dark.gif' %}";
+            gif2.src = "{% static 'account/img/s_dark.gif' %}";
+          }
+
+          if (currentTheme === "Dark") {
+            fire1.src = "{% static 'account/img/fire_light.gif' %}";
+            fire2.src = "{% static 'account/img/fire_light.gif' %}";
+          } else {
+            fire1.src = "{% static 'account/img/fire_dark.gif' %}";
+            fire2.src = "{% static 'account/img/fire_dark.gif' %}";
+          }
+        });
+      });
+      document.getElementById("account").addEventListener("click", function () {
+        window.location.href =
+          "https://ef48-46-61-120-37.ngrok-free.app/profile/";
+      });
+    </script>
+  </body>
+</html>

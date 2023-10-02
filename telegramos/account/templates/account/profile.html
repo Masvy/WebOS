@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link
+      type="text/css"
+      href="{% static 'account/css/style.css' %}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="basis">
+      <div class="profile--container--log">
+        <div class="telegram">Telegram</div>
+        <img id="gif1" src="{% static 'account/img/o_light.gif' %}" alt="o" />
+        <img id="gif2" src="{% static 'account/img/s_light.gif' %}" alt="s" />
+      </div>
+      <div class="photo--container">
+        <div
+          class="photo"
+          style="background-image: url('{% static 'account/img/cat.jpg' %}')"
+        ></div>
+      </div>
+      <div class="name">CAT_Dealer</div>
+      <div class="user--name--container">
+        <div class="user--name">@Rij3Y_6</div>
+      </div>
+      <div class="desc--profile--container">
+        <div class="desc--profile">Wait! More features coming very soon</div>
+      </div>
+      <div class="experience--container">
+        <div class="experience">0d on the platform.</div>
+      </div>
+      <div class="theme_container">
+        <div class="theme">
+          <a href="#" id="themeToggle">Dark</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const themeToggle = document.getElementById("themeToggle");
+        const body = document.body;
+        const gif1 = document.getElementById("gif1");
+        const gif2 = document.getElementById("gif2");
+        const fire1 = document.getElementById("fire1");
+        const fire2 = document.getElementById("fire2");
+
+        themeToggle.addEventListener("click", function () {
+          body.classList.toggle("dark");
+          body.classList.toggle("light");
+          const currentTheme = body.classList.contains("dark")
+            ? "Light"
+            : "Dark";
+          themeToggle.textContent = `${currentTheme}`;
+
+          if (currentTheme === "Dark") {
+            gif1.src = "{% static 'account/img/o_light.gif' %}";
+            gif2.src = "{% static 'account/img/s_light.gif' %}";
+          } else {
+            gif1.src = "{% static 'account/img/o_dark.gif' %}";
+            gif2.src = "{% static 'account/img/s_dark.gif' %}";
+          }
+
+          if (currentTheme === "Dark") {
+            fire1.src = "{% static 'account/img/fire_light.gif' %}";
+            fire2.src = "{% static 'account/img/fire_light.gif' %}";
+          } else {
+            fire1.src = "{% static 'account/img/fire_dark.gif' %}";
+            fire2.src = "{% static 'account/img/fire_dark.gif' %}";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
