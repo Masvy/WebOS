@@ -39,9 +39,6 @@ def save_user(request):
 def check_user(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        print("\n\n")
-        print(data.get('photo'))
-        print("\n\n")
         user_id = data.get('user_id')
         user = Profile.objects.filter(user_id=user_id).exists()
         if user:

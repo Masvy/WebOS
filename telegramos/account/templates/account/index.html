@@ -75,7 +75,6 @@
       let userId = tg.initDataUnsafe.user.id;
       let name = tg.initDataUnsafe.user.first_name;
       let userName = tg.initDataUnsafe.user.username;
-      let photo = tg.initDataUnsafe.user;
 
       const csrf_token = "{{ csrf_token }}";
 
@@ -88,7 +87,6 @@
           user_id: userId,
           name: name,
           user_name: userName,
-          photo: photo,
           csrf_token: csrf_token,
         }),
       })
