@@ -32,3 +32,13 @@ def save_user(request):
         return JsonResponse({'message': 'Code saved successfully'}, status=200)
 
     return JsonResponse({'message': 'Invalid request'}, status=400)
+
+
+@csrf_exempt
+def check_user(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        users = Profile.find(data.id)
+        if users == 0:
+            return render(request, index)
+        return render(request, main)

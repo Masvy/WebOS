@@ -71,6 +71,33 @@
         const fire1 = document.getElementById("fire1");
         const fire2 = document.getElementById("fire2");
 
+        // Функция для переключения темы
+        function toggleTheme() {
+          const prefersDarkScheme = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          );
+          if (prefersDarkScheme.matches) {
+            body.classList.add("dark");
+            body.classList.remove("light");
+            themeToggle.textContent = "Light";
+            gif1.src = "{% static 'account/img/o_dark.gif' %}";
+            gif2.src = "{% static 'account/img/s_dark.gif' %}";
+            fire1.src = "{% static 'account/img/fire_dark.gif' %}";
+            fire2.src = "{% static 'account/img/fire_dark.gif' %}";
+          } else {
+            body.classList.add("light");
+            body.classList.remove("dark");
+            themeToggle.textContent = "Dark";
+            gif1.src = "{% static 'account/img/o_light.gif' %}";
+            gif2.src = "{% static 'account/img/s_light.gif' %}";
+            fire1.src = "{% static 'account/img/fire_light.gif' %}";
+            fire2.src = "{% static 'account/img/fire_light.gif' %}";
+          }
+        }
+
+        // Инициализация темы при загрузке страницы
+        toggleTheme();
+
         themeToggle.addEventListener("click", function () {
           body.classList.toggle("dark");
           body.classList.toggle("light");
@@ -98,7 +125,7 @@
       });
       document.getElementById("account").addEventListener("click", function () {
         window.location.href =
-          "https://ef48-46-61-120-37.ngrok-free.app/profile/";
+          "https://ee1b-46-61-120-37.ngrok-free.app/profile/";
       });
     </script>
   </body>
