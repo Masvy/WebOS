@@ -1,3 +1,4 @@
+from django.core import serializers
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
@@ -56,9 +57,13 @@ def get_profile(request):
             resp = HttpResponse()
             resp.status_code = 400
             return resp
-        user = Profile.objects.get(user_id=user_id)
+        user: Profile = Profile.objects.get(user_id=user_id)
         if user:
-            return HttpResponse(json.dumps(user))
+            js = serializers.serialize('json', [ user, ])
+            print("\n\n")
+            print(js)
+            print("\n\n")
+            return HttpResponse(js)
         resp = HttpResponse()
         resp.status_code = 404
         return resp
