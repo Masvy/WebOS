@@ -6,7 +6,7 @@ import json
 
 
 def index(request):
-    return render(request, 'account/redirect.html')
+    return render(request, 'account/index.html')
 
 
 def main(request):
@@ -32,15 +32,3 @@ def save_user(request):
         return JsonResponse({'message': 'Code saved successfully'}, status=200)
 
     return JsonResponse({'message': 'Invalid request'}, status=400)
-
-
-@csrf_exempt
-def check_user(request):
-    if request.method == 'GET':
-        data = json.loads(request.body)
-        user_id = data.get('user_id')
-        user = Profile.objects.filter(user_id=user_id).exists()
-        print(user)
-        if user:
-            return render(request, 'account/index.html')
-        return render(request, 'account/main.html')
