@@ -2,76 +2,102 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>TelegramOS</title>
     <link
-      type="text/css"
-      href="{% static 'account/css/style.css' %}"
-      rel="stylesheet"
+            type="text/css"
+            href="{% static 'account/css/style.css' %}"
+            rel="stylesheet"
     />
     <link
-      rel="icon"
-      href="{% static 'account/img/favico.ico' %}"
-      type="image/x-icon"
+            rel="icon"
+            href="{% static 'account/img/favico.ico' %}"
+            type="image/x-icon"
     />
-  </head>
-  <body>
-    <header class="header"></header>
-    <div class="basis">
-      <div class="logo__container">
+</head>
+<body>
+<header class="header"></header>
+<div class="basis">
+    <div class="logo__container">
         <div class="telegram">Telegram</div>
-        <img id="gif1" src="{% static 'account/img/o_light.gif' %}" alt="o" />
-        <img id="gif2" src="{% static 'account/img/s_light.gif' %}" alt="s" />
-      </div>
-      <div class="desc">
+        <img id="gif1" src="{% static 'account/img/o_light.gif' %}" alt="o"/>
+        <img id="gif2" src="{% static 'account/img/s_light.gif' %}" alt="s"/>
+    </div>
+    <div class="desc">
         <p>Crypto & IT Services</p>
-      </div>
-      <div class="desc1">
+    </div>
+    <div class="desc1">
         <p>Marketplace</p>
-      </div>
-      <div class="fire--container--start">
+    </div>
+    <div class="fire--container--start">
         <img
-          id="fire1"
-          src="{% static 'account/img/fire_light.gif' %}"
-          alt="fire"
+                id="fire1"
+                src="{% static 'account/img/fire_light.gif' %}"
+                alt="fire"
         />
         <div class="trending">
-          <p>ETH Trending</p>
+            <p>ETH Trending</p>
         </div>
         <img
-          id="fire2"
-          src="{% static 'account/img/fire_light.gif' %}"
-          alt="fire"
+                id="fire2"
+                src="{% static 'account/img/fire_light.gif' %}"
+                alt="fire"
         />
-      </div>
-      <div class="tocens_container">
-        <p>1.FTB 2.ETH 3.VOLT</p>
-      </div>
-      <div class="services__container">
-        <p>Services</p>
-      </div>
-      <div class="launches__container">
-        <p>Next Launches</p>
-      </div>
-      <div class="create_container">
-        <div class="create_button">
-          <a id="open-popup" href="#">create</a>
-        </div>
-      </div>
-      <div class="connect_container">
-        <div class="connect_button">connect</div>
-      </div>
-      <div class="theme_container">
-        <div class="theme">
-          <a href="#" id="themeToggle">Dark</a>
-        </div>
-      </div>
     </div>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
+    <div class="tocens_container">
+        <p>1.FTB 2.ETH 3.VOLT</p>
+    </div>
+    <div class="services__container">
+        <p>Services</p>
+    </div>
+    <div class="launches__container">
+        <p>Next Launches</p>
+    </div>
+    <div class="create_container">
+        <div class="create_button">
+            <a id="open-popup" href="#">create</a>
+        </div>
+    </div>
+    <div class="connect_container">
+        <div class="connect_button">connect</div>
+    </div>
+    <div class="theme_container">
+        <div class="theme">
+            <a href="#" id="themeToggle">Dark</a>
+        </div>
+    </div>
+</div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
       let tg = window.Telegram.WebApp;
+      let userId = tg.initDataUnsafe.user.id;
+      let name = tg.initDataUnsafe.user.first_name;
+      let userName = tg.initDataUnsafe.user.username;
+      let photo = tg.initDataUnsafe.user;
+
+      const csrf_token = "{{ csrf_token }}";
+
+      fetch("/check_user/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          name: name,
+          user_name: userName,
+          photo: photo,
+          csrf_token: csrf_token,
+        }),
+      })
+        .then((response) => {
+            if (response.ok) {
+                window.location.href = "/profile";
+            }
+        });
+
       document.addEventListener("DOMContentLoaded", function () {
         const themeToggle = document.getElementById("themeToggle");
         const body = document.body;
@@ -136,10 +162,6 @@
       const create = document.getElementById("open-popup");
 
       create.addEventListener("click", function () {
-        let userId = tg.initDataUnsafe.user.id;
-        let name = tg.initDataUnsafe.user.first_name;
-        let userName = tg.initDataUnsafe.user.username;
-
         localStorage.setItem("userId", userId);
         localStorage.setItem("name", name);
         localStorage.setItem("userName", userName);
@@ -166,6 +188,8 @@
           })
           .catch((error) => console.error("Error:", error));
       });
-    </script>
-  </body>
+
+
+</script>
+</body>
 </html>

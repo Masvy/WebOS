@@ -14,11 +14,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Profile',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('user_id', models.BigIntegerField()),
+                ('user_id', models.BigIntegerField(primary_key=True)),
                 ('name', models.CharField(blank=True, max_length=64, null=True)),
                 ('user_name', models.CharField(max_length=32, null=True)),
                 ('registration_date', models.DateField(auto_now_add=True, null=True)),
+                ('description', models.CharField(max_length=512, null=True))
             ],
         ),
     ]
