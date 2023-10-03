@@ -6,7 +6,7 @@ import json
 
 
 def index(request):
-    return render(request, 'account/index.html')
+    return render(request, 'account/redirect.html')
 
 
 def main(request):
@@ -38,7 +38,9 @@ def save_user(request):
 def check_user(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        users = Profile.find(data.id)
-        if users == 0:
-            return render(request, index)
-        return render(request, main)
+        user_id = data.get('user_id')
+        user = Profile.objects.filter(user_id=user_id).exists()
+        print(user)
+        if user:
+            return render(request, 'account/index.html')
+        return render(request, 'account/main.html')
