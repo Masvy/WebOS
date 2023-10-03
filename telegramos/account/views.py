@@ -36,7 +36,7 @@ def save_user(request):
 
 @csrf_exempt
 def check_user(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
         data = json.loads(request.body)
         user_id = data.get('user_id')
         user = Profile.objects.filter(user_id=user_id).exists()
