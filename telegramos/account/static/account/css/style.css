@@ -282,13 +282,12 @@ body.dark {
 }
 
 .photo--container {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  margin-top: 30px;
+  position: relative;
+  margin-left: 100px;
 }
 
 .photo {
+  position: relative;
   width: 170px;
   height: 170px;
   border-radius: 50%;
@@ -296,6 +295,31 @@ body.dark {
   background-size: cover;
   background-position: center;
   box-shadow: 9px 11px 5px -4px rgba(0, 0, 0, 0.27) inset;
+}
+
+.grade {
+  margin-top: -10px;
+  margin-left: -50px;
+  position: absolute;
+  top: 10px;
+  width: 93.75px;
+  height: 40px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 2px 5px 7px -2px rgba(0, 0, 0, 0.25) inset;
+  text-align: center;
+  color: #000;
+}
+
+.grade p {
+  text-align: center;
+  font-family: Inter;
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: 2.3px;
+  margin-top: 7px;
+  margin-left: 5px;
+  text-transform: uppercase;
 }
 
 .name {
@@ -309,6 +333,25 @@ body.dark {
   font-weight: 400;
 }
 
+.deals {
+  height: 20px;
+  margin-top: 17px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 3.9px;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.name p {
+  line-height: normal;
+  text-overflow: clip;
+  white-space: nowrap;
+  overflow: auto;
+  cursor: pointer;
+}
+
 .user--name--container {
   justify-content: center;
   align-items: center;
@@ -316,10 +359,36 @@ body.dark {
   margin-top: 24px;
 }
 
+.mail {
+  width: 32px;
+  height: 32px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 2px 5px 7px -2px rgba(0, 0, 0, 0.25) inset;
+  margin-right: 12px;
+}
+
+.wallet {
+  width: 32px;
+  height: 32px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 2px 5px 7px -2px rgba(0, 0, 0, 0.25) inset;
+  margin-right: 12px;
+}
+
+.like {
+  width: 32px;
+  height: 32px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 2px 5px 7px -2px rgba(0, 0, 0, 0.25) inset;
+}
+
 .user--name {
   text-align: center;
   width: 124px;
-  height: 32px;
+  height: 39px;
   border-radius: 20px;
   background: #fff;
   box-shadow: 2px 5px 7px -2px rgba(0, 0, 0, 0.25) inset;
@@ -328,30 +397,59 @@ body.dark {
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 3.9px;
+  padding-right: 4px;
+  padding-left: 4px;
+  margin-right: 12px;
+}
+
+.user--name p {
+  line-height: normal;
+  text-overflow: clip;
+  white-space: nowrap;
+  overflow: auto;
+  cursor: pointer;
+}
+
+.user--name p:hover {
+  white-space: normal;
+  overflow: auto;
+  max-width: 100%;
 }
 
 .desc--profile--container {
-  justify-content: center;
   display: flex;
-  margin-top: 33px;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  overflow-y: auto;
+}
+
+.scrollable-content {
   max-width: 100%;
-  height: 109px;
+  width: 300px; /* Задаем фиксированную ширину */
 }
 
 .desc--profile {
-  text-align: center;
+  text-align: justify;
   font-family: "Inter", sans-serif;
   letter-spacing: 2px;
   font-size: 10px;
   font-weight: 500;
+  text-transform: uppercase;
+}
+
+.desc--profile p {
+  word-wrap: break-word;
+  line-height: 1.2;
+  margin: 0;
 }
 
 .experience--container {
   justify-content: left;
   display: flex;
   margin-left: 24px;
-  margin-top: 240px;
-  margin-bottom: -100px;
+  margin-top: 60px;
+  margin-bottom: -60px;
   max-width: 100%;
   height: 109px;
 }
@@ -365,7 +463,11 @@ body.dark {
   text-transform: uppercase;
 }
 
-.dark .user--name {
+.dark .user--name,
+.dark .all--revievs,
+.dark .request--payment,
+.dark .grade,
+.dark .like {
   background: rgba(11, 30, 49, 0.96);
   border-radius: 20px;
   color: #ffffff;
@@ -483,4 +585,47 @@ body.dark {
   right: 15px;
   font-size: 20px;
   cursor: pointer;
+}
+
+.button--container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 26px;
+  width: 355px;
+}
+
+.all--revievs {
+  text-align: center;
+  width: 124px;
+  height: 32px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 2px 5px 7px -2px rgba(0, 0, 0, 0.25) inset;
+  text-shadow: 2px 1px 3px rgba(0, 0, 0, 0.25);
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 3.9px;
+  padding-right: 4px;
+  padding-left: 4px;
+  margin-right: 13px;
+  text-transform: uppercase;
+}
+
+.request--payment {
+  text-align: center;
+  width: 173px;
+  height: 32px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 2px 5px 7px -2px rgba(0, 0, 0, 0.25) inset;
+  text-shadow: 2px 1px 3px rgba(0, 0, 0, 0.25);
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 3.9px;
+  padding-right: 4px;
+  padding-left: 4px;
+  text-transform: uppercase;
 }
