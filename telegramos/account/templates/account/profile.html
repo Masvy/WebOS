@@ -25,12 +25,12 @@
           style="background-image: url('{% static 'account/img/cat.jpg' %}')"
         ></div>
       </div>
-      <div class="name">CAT_Dealer</div>
+      <div class="name" id="name">CAT_Dealer</div>
       <div class="user--name--container">
         <div class="user--name" id="userName">@Rij3Y_6</div>
       </div>
       <div class="desc--profile--container">
-        <div class="desc--profile">Wait! More features coming very soon</div>
+        <div class="desc--profile" id="description">Wait! More features coming very soon</div>
       </div>
       <div class="experience--container">
         <div class="experience">0d on the platform.</div>
@@ -45,13 +45,13 @@
     <script>
       let tg = window.Telegram.WebApp;
       let userId = tg.initDataUnsafe.user.id;
-      let userName_ = tg.initDataUnsafe.user.username;
-      userName.textContent = `@${userName_}`;
       const csrf_token = "{{ csrf_token }}";
 
       document.addEventListener("DOMContentLoaded", function () {
         const themeToggle = document.getElementById("themeToggle");
+        const name = document.getElementById("name");
         const userName = document.getElementById("userName");
+        const description = document.getElementById("description");
         const body = document.body;
         const gif1 = document.getElementById("gif1");
         const gif2 = document.getElementById("gif2");
@@ -66,7 +66,13 @@
         })
         .then((response) => response.json())
         .then((data) => {
-          userName.textContent = `${data.fields.user_name}`;
+          name.textContent = `${data[0].fields.name}`;
+          userName.textContent = `@${data[0].fields.user_name}`;
+          if (data[0].fields.description != undefined) {
+            description.textContent = `${data[0].fields.description}`;
+          } else {
+            description.textContent = `default description`;
+          }
         });
 
         themeToggle.addEventListener("click", function () {
