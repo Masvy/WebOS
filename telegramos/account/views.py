@@ -26,9 +26,10 @@ def save_user(request):
         user_id = data.get('user_id')
         name = data.get('name')
         user_name = data.get('user_name')
+        photo_url = f'/users/{user_id}/profile'
         # Сохраняем код в базу данных
         profile = Profile(user_id=user_id, name=name,
-                          user_name=user_name)
+                          user_name=user_name, photo_url=photo_url)
         profile.save()
 
         return JsonResponse({'message': 'Code saved successfully'}, status=200)
