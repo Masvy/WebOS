@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-bwiyp9v2a@maix(na6!rej_z=e3c3htctqe&r9h2&9c430ua(&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['d615-46-61-120-37.ngrok-free.app']
+ALLOWED_HOSTS = ['ee1b-46-61-120-37.ngrok-free.app','fb34-212-220-212-97.ngrok-free.app']
 
 
 # Application definition
@@ -84,8 +84,8 @@ DATABASES = {
         'NAME': env('DB_NAME'),
         'USER': env('PGUSER'),
         'PASSWORD': env('PGPASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'HOST': '192.168.1.65',
+        'PORT': '5432',
     }
 }
 

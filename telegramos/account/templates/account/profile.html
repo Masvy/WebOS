@@ -88,39 +88,16 @@
     <script>
       let tg = window.Telegram.WebApp;
       let userId = tg.initDataUnsafe.user.id;
-      let userName_ = tg.initDataUnsafe.user.username;
-      userName.textContent = `@${userName_}`;
       const csrf_token = "{{ csrf_token }}";
 
       document.addEventListener("DOMContentLoaded", function () {
         const themeToggle = document.getElementById("themeToggle");
+        const name = document.getElementById("name");
         const userName = document.getElementById("username");
+        const description = document.getElementById("description");
         const body = document.body;
         const gif1 = document.getElementById("gif1");
         const gif2 = document.getElementById("gif2");
-
-        // Функция для переключения темы
-        function toggleTheme() {
-          const prefersDarkScheme = window.matchMedia(
-            "(prefers-color-scheme: dark)"
-          );
-          if (prefersDarkScheme.matches) {
-            body.classList.add("dark");
-            body.classList.remove("light");
-            themeToggle.textContent = "Light";
-            gif1.src = "{% static 'account/img/o_dark.gif' %}";
-            gif2.src = "{% static 'account/img/s_dark.gif' %}";
-          } else {
-            body.classList.add("light");
-            body.classList.remove("dark");
-            themeToggle.textContent = "Dark";
-            gif1.src = "{% static 'account/img/o_light.gif' %}";
-            gif2.src = "{% static 'account/img/s_light.gif' %}";
-          }
-        }
-
-        // Инициализация темы при загрузке страницы
-        toggleTheme();
 
         fetch("/get_profile/?user_id=" + userId, {
           method: "GET",
@@ -130,7 +107,13 @@
         })
         .then((response) => response.json())
         .then((data) => {
-          userName.textContent = `${data.fields.user_name}`;
+          name.textContent = `${data[0].fields.name}`;
+          userName.textContent = `@${data[0].fields.user_name}`;
+          if (data[0].fields.description != undefined) {
+            description.textContent = `${data[0].fields.description}`;
+          } else {
+            description.textContent = `default description`;
+          }
         });
 
         themeToggle.addEventListener("click", function () {
