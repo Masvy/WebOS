@@ -24,16 +24,59 @@
           class="photo"
           style="background-image: url('{% static 'account/img/cat.jpg' %}')"
         ></div>
+        <div class="grade">
+          <p>5.0</p>
+        </div>
       </div>
-      <div class="name" id="name">CAT_Dealer</div>
+      <div class="name">
+        <p>cat_dealereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p>
+      </div>
+      <div class="deals">
+        <p>0 deals</p>
+      </div>
       <div class="user--name--container">
-        <div class="user--name" id="userName">@Rij3Y_6</div>
+        <div class="mail">
+          <div class="mail--icon">
+            <img src="{% static 'account/img/mail.png' %}" alt="mail" />
+          </div>
+        </div>
+        <div class="wallet">
+          <div class="wallet--icon">
+            <img src="{% static 'account/img/wallet.png' %}" alt="wallet" />
+          </div>
+        </div>
+        <div class="user--name">
+          <p id="username">@YsmanKhamidullin</p>
+        </div>
+        <div class="like">
+          <img src="{% static 'account/img/like.png' %}" alt="like" />
+        </div>
       </div>
       <div class="desc--profile--container">
-        <div class="desc--profile" id="description">Wait! More features coming very soon</div>
+        <div class="scrollable-content">
+          <div class="desc--profile">
+            <p>
+              short description about me, what I do, and what I can do. The cost
+              of my services. Write to me for details in private messages, and
+              after discussion, I’ll provide you with an exclusive payment lot.
+              short description about me, what I do, and what I can do. The cost
+              of my services.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="button--container">
+        <div class="all--revievs">
+          <p>all reviews</p>
+        </div>
+        <div class="request--payment">
+          <p>request payment</p>
+        </div>
       </div>
       <div class="experience--container">
-        <div class="experience">0d on the platform.</div>
+        <div class="experience">
+          <p>0d on the platform.</p>
+        </div>
       </div>
       <div class="theme_container">
         <div class="theme">
@@ -50,13 +93,11 @@
       document.addEventListener("DOMContentLoaded", function () {
         const themeToggle = document.getElementById("themeToggle");
         const name = document.getElementById("name");
-        const userName = document.getElementById("userName");
+        const userName = document.getElementById("username");
         const description = document.getElementById("description");
         const body = document.body;
         const gif1 = document.getElementById("gif1");
         const gif2 = document.getElementById("gif2");
-        const fire1 = document.getElementById("fire1");
-        const fire2 = document.getElementById("fire2");
 
         fetch("/get_profile/?user_id=" + userId, {
           method: "GET",
@@ -89,14 +130,6 @@
           } else {
             gif1.src = "{% static 'account/img/o_dark.gif' %}";
             gif2.src = "{% static 'account/img/s_dark.gif' %}";
-          }
-
-          if (currentTheme === "Dark") {
-            fire1.src = "{% static 'account/img/fire_light.gif' %}";
-            fire2.src = "{% static 'account/img/fire_light.gif' %}";
-          } else {
-            fire1.src = "{% static 'account/img/fire_dark.gif' %}";
-            fire2.src = "{% static 'account/img/fire_dark.gif' %}";
           }
         });
       });
