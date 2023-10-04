@@ -53,17 +53,33 @@
         </div>
       </div>
       <div class="desc--profile--container">
-        <div class="scrollable-content">
-          <div class="desc--profile">
-            <p>
-              short description about me, what I do, and what I can do. The cost
-              of my services. Write to me for details in private messages, and
-              after discussion, I’ll provide you with an exclusive payment lot.
-              short description about me, what I do, and what I can do. The cost
-              of my services.
-            </p>
-          </div>
+        <div class="desc--profile">
+          <span id="profileDesc"
+            >short description about me, what I do, and what I can do. The cost
+            of my services. Write to me for details in private messages, and
+            after discussion, I’ll provide you with an exclusive payment lot.
+            short description about me, what I do, and what I can do. The cost
+            of my services.
+          </span>
         </div>
+      </div>
+      <div class="edit--container">
+        <button
+          onclick="editDescription()"
+          style="
+            display: block;
+            margin: 0 auto;
+            margin-top: 10px;
+            border-radius: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+          "
+        >
+          Edit
+        </button>
       </div>
       <div class="button--container">
         <div class="all--revievs">
@@ -103,18 +119,40 @@
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-          }
+          },
         })
-        .then((response) => response.json())
-        .then((data) => {
-          name.textContent = `${data[0].fields.name}`;
-          userName.textContent = `@${data[0].fields.user_name}`;
-          if (data[0].fields.description != undefined) {
-            description.textContent = `${data[0].fields.description}`;
+          .then((response) => response.json())
+          .then((data) => {
+            name.textContent = `${data[0].fields.name}`;
+            userName.textContent = `@${data[0].fields.user_name}`;
+            if (data[0].fields.description != undefined) {
+              description.textContent = `${data[0].fields.description}`;
+            } else {
+              description.textContent = `default description`;
+            }
+          });
+
+        function toggleTheme() {
+          const prefersDarkScheme = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          );
+          if (prefersDarkScheme.matches) {
+            body.classList.add("dark");
+            body.classList.remove("light");
+            themeToggle.textContent = "Light";
+            gif1.src = "{% static 'account/img/o_dark.gif' %}";
+            gif2.src = "{% static 'account/img/s_dark.gif' %}";
           } else {
-            description.textContent = `default description`;
+            body.classList.add("light");
+            body.classList.remove("dark");
+            themeToggle.textContent = "Dark";
+            gif1.src = "{% static 'account/img/o_light.gif' %}";
+            gif2.src = "{% static 'account/img/s_light.gif' %}";
           }
-        });
+        }
+
+        // Инициализация темы при загрузке страницы
+        toggleTheme();
 
         themeToggle.addEventListener("click", function () {
           body.classList.toggle("dark");
@@ -130,6 +168,28 @@
           } else {
             gif1.src = "{% static 'account/img/o_dark.gif' %}";
             gif2.src = "{% static 'account/img/s_dark.gif' %}";
+          }
+        });
+      });
+      function editDescription() {
+        const profileDesc = document.getElementById("profileDesc");
+        const newDescription = prompt(
+          "Enter a new profile description (maximum 512 characters):"
+        );
+
+        if (newDescription !== null && newDescription !== "") {
+          if (newDescription.length <= 512) {
+            profileDesc.textContent = newDescription;
+          } else {
+            alert("Too many characters entered. Maximum 512.");
+          }
+        }
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        var names = document.querySelectorAll(".name p");
+        names.forEach(function (name) {
+          if (name.textContent.length > 5) {
+            name.textContent = name.textContent.slice(0, 5) + "...";
           }
         });
       });

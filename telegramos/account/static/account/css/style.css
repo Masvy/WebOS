@@ -346,7 +346,7 @@ body.dark {
 
 .name p {
   line-height: normal;
-  text-overflow: clip;
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: auto;
   cursor: pointer;
@@ -357,6 +357,7 @@ body.dark {
   align-items: center;
   display: flex;
   margin-top: 24px;
+  margin-bottom: 10px;
 }
 
 .mail {
@@ -436,6 +437,8 @@ body.dark {
   font-size: 10px;
   font-weight: 500;
   text-transform: uppercase;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .desc--profile p {
@@ -466,8 +469,7 @@ body.dark {
 .dark .user--name,
 .dark .all--revievs,
 .dark .request--payment,
-.dark .grade,
-.dark .like {
+.dark .grade {
   background: rgba(11, 30, 49, 0.96);
   border-radius: 20px;
   color: #ffffff;
@@ -627,5 +629,13 @@ body.dark {
   letter-spacing: 3.9px;
   padding-right: 4px;
   padding-left: 4px;
+  text-transform: uppercase;
+}
+
+.edit--container button {
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 3.9px;
   text-transform: uppercase;
 }
