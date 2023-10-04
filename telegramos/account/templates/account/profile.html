@@ -84,9 +84,17 @@
         </div>
       </div>
     </div>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+      let tg = window.Telegram.WebApp;
+      let userId = tg.initDataUnsafe.user.id;
+      let userName_ = tg.initDataUnsafe.user.username;
+      userName.textContent = `@${userName_}`;
+      const csrf_token = "{{ csrf_token }}";
+
       document.addEventListener("DOMContentLoaded", function () {
         const themeToggle = document.getElementById("themeToggle");
+        const userName = document.getElementById("username");
         const body = document.body;
         const gif1 = document.getElementById("gif1");
         const gif2 = document.getElementById("gif2");
@@ -113,6 +121,17 @@
 
         // Инициализация темы при загрузке страницы
         toggleTheme();
+
+        fetch("/get_profile/?user_id=" + userId, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          userName.textContent = `${data.fields.user_name}`;
+        });
 
         themeToggle.addEventListener("click", function () {
           body.classList.toggle("dark");
