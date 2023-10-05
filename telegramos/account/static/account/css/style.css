@@ -25,7 +25,7 @@ body.dark {
 }
 
 .basis {
-  max-height: 100%;
+  max-height: 900px;
   width: 100%;
 }
 
@@ -283,7 +283,9 @@ body.dark {
 
 .photo--container {
   position: relative;
-  margin-left: 100px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .photo {
@@ -299,7 +301,7 @@ body.dark {
 
 .grade {
   margin-top: -10px;
-  margin-left: -50px;
+  margin-left: -130px;
   position: absolute;
   top: 10px;
   width: 93.75px;
@@ -451,10 +453,27 @@ body.dark {
   justify-content: left;
   display: flex;
   margin-left: 24px;
-  margin-top: 60px;
+  margin-top: -3px;
   margin-bottom: -60px;
   max-width: 100%;
   height: 109px;
+}
+
+.num--reviews--container {
+  margin-top: 29px;
+  margin-left: 24px;
+  justify-content: left;
+  display: flex;
+  max-width: 100%;
+}
+
+.num--reviews {
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 2px;
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 .experience {
@@ -469,7 +488,9 @@ body.dark {
 .dark .user--name,
 .dark .all--revievs,
 .dark .request--payment,
-.dark .grade {
+.dark .grade,
+.dark .reviews--field,
+.dark .reviews--field p {
   background: rgba(11, 30, 49, 0.96);
   border-radius: 20px;
   color: #ffffff;
@@ -594,7 +615,6 @@ body.dark {
   align-items: center;
   display: flex;
   margin-top: 26px;
-  width: 355px;
 }
 
 .all--revievs {
@@ -637,5 +657,56 @@ body.dark {
   font-size: 10px;
   font-weight: 300;
   letter-spacing: 3.9px;
+  text-transform: uppercase;
+}
+
+.reviews--container {
+  margin-top: 30px;
+  height: 106px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviews--field {
+  margin-right: 4px;
+  width: 300px;
+  height: 120px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 2px 5px 7px -2px rgba(0, 0, 0, 0.25) inset;
+}
+
+.reviews--field img {
+  height: 70px;
+  width: 70px;
+  border-radius: 82px;
+  border: 4px solid #fff;
+  box-shadow: 9px 11px 5px -4px rgba(0, 0, 0, 0.27) inset;
+  margin-left: 15px;
+  margin-top: 25px;
+}
+
+.name--reviews {
+  color: #0d0d0d;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 100%; /* 13px */
+  letter-spacing: 3.9px;
+  text-transform: uppercase;
+  margin-left: 95px;
+  margin-top: -80px;
+}
+
+.reviews {
+  color: #000;
+  font-family: Inter;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 155%; /* 12.4px */
+  letter-spacing: 0.8px;
   text-transform: uppercase;
 }
