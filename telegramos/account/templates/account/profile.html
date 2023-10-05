@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="name">
-        <p>cat_dealereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p>
+        <p id="name">cat_dealereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p>
       </div>
       <div class="deals">
         <p>0 deals</p>
@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="user--name">
-          <p id="username">@YsmanKhamidullin</p>
+          <p id="username">UserName</p>
         </div>
         <div class="like">
           <img src="{% static 'account/img/like.png' %}" alt="like" />
@@ -110,7 +110,7 @@
         const themeToggle = document.getElementById("themeToggle");
         const name = document.getElementById("name");
         const userName = document.getElementById("username");
-        const description = document.getElementById("description");
+        const description = document.getElementById("profileDesc");
         const body = document.body;
         const gif1 = document.getElementById("gif1");
         const gif2 = document.getElementById("gif2");
@@ -180,6 +180,18 @@
         if (newDescription !== null && newDescription !== "") {
           if (newDescription.length <= 512) {
             profileDesc.textContent = newDescription;
+
+            fetch("/put_description/", {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                user_id: userId,
+                description: newDescription,
+              })
+            });
+
           } else {
             alert("Too many characters entered. Maximum 512.");
           }
