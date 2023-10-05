@@ -68,9 +68,9 @@ def get_profile(request):
         user: Profile = Profile.objects.get(user_id=user_id)
         if user:
             js = serializers.serialize('json', [user, ])
-            print("\n\n")
+            print('\n\n')
             print(js)
-            print("\n\n")
+            print('\n\n')
             return HttpResponse(js)
         resp = HttpResponse()
         resp.status_code = 404
@@ -89,7 +89,7 @@ def get_profile_photo(request):
                 response = HttpResponse(file.read(), content_type='image/jpeg')  # Adjust the content type as needed
             return response
         # If the file does not exist, return an error response
-        return HttpResponse("File not found", status=404)
+        return HttpResponse('File not found', status=404)
 
 
 @csrf_exempt
@@ -120,9 +120,9 @@ def put_photo(request):
         photo_base64 = data.get('file')
         # Save file to os
         binary_file_data = base64.b64decode(photo_base64)
-        file_name = f"user_{user_id}_photo.jpg"
-        file_path = os.path.join(os.getcwd(), 'UsersPhoto', file_name)
-        with open(file_path, "wb") as file:
+        file_name = 'profile.jpg'
+        file_path = os.path.join(os.getenv('USER_ROOT'), user_id, file_name)
+        with open(file_path, 'wb') as file:
             file.write(binary_file_data)
         # Try update DB
         if not user_id:
