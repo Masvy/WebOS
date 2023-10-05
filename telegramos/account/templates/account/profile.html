@@ -22,6 +22,7 @@
       <div class="photo--container">
         <div
           class="photo"
+          id="profilePhoto"
           style="background-image: url('{% static 'account/img/cat.jpg' %}')"
         ></div>
         <div class="grade">
@@ -114,6 +115,7 @@
         const body = document.body;
         const gif1 = document.getElementById("gif1");
         const gif2 = document.getElementById("gif2");
+        var profilePhoto = document.getElementById('profilePhoto');
 
         fetch("/get_profile/?user_id=" + userId, {
           method: "GET",
@@ -121,20 +123,22 @@
             "Content-Type": "application/json",
           },
         })
-          .then((response) => response.json())
-          .then((data) => {
-            name.textContent = `${data[0].fields.name}`;
-            userName.textContent = `@${data[0].fields.user_name}`;
-            if (data[0].fields.description != undefined) {
-              description.textContent = `${data[0].fields.description}`;
-            } else {
-              description.textContent = `default description`;
-            }
-          });
+                .then((response) => response.json())
+                .then((data) => {
+                  name.textContent = `${data[0].fields.name}`;
+                  userName.textContent = `@${data[0].fields.user_name}`;
+                  if (data[0].fields.description != undefined) {
+                    description.textContent = `${data[0].fields.description}`;
+                  } else {
+                    description.textContent = `default description`;
+                  }
+                  //TODO:Load photo
+                  // profilePhoto.style.backgroundImage = `${data[0].fields.photo_url}`;
+                });
 
         function toggleTheme() {
           const prefersDarkScheme = window.matchMedia(
-            "(prefers-color-scheme: dark)"
+                  "(prefers-color-scheme: dark)"
           );
           if (prefersDarkScheme.matches) {
             body.classList.add("dark");
@@ -206,5 +210,39 @@
         });
       });
     </script>
+<input
+        type="file"
+        accept="image/*"
+        name="image"
+        id="file"
+        onchange="loadFile(event)"
+        style="display: none;"
+/>
+<script>
+    var loadFile = function (event) {
+        // Change the background image of the profile photo
+        var profilePhoto = document.getElementById('profilePhoto');
+        var url = 'url(' + URL.createObjectURL(event.target.files[0]) + ')';
+        profilePhoto.style.backgroundImage = url;
+        fetch("/put_photo/", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                user_id: userId,
+                url: url,
+            })
+        });
+
+    };
+
+    // Add an event listener to the profile photo to trigger file input click
+    var profilePhoto = document.getElementById('profilePhoto');
+    profilePhoto.addEventListener('click', function () {
+        var fileInput = document.getElementById('file');
+        fileInput.click();
+    });
+</script>
   </body>
 </html>

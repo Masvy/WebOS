@@ -18,6 +18,9 @@ def main(request):
 def profile(requst):
     return render(requst, 'account/profile.html')
 
+def test(requst):
+    return render(requst, 'account/test.html')
+
 
 @csrf_exempt
 def save_user(request):
@@ -82,6 +85,26 @@ def put_description(request):
         user = Profile.objects.get(user_id=user_id)
         if user:
             user.description = description
+            user.save()
+            return HttpResponse()
+        resp = HttpResponse()
+        resp.status_code = 404
+        return resp
+
+@csrf_exempt
+def put_photo(request):
+    if request.method == 'PUT':
+        data = json.loads(request.body)
+        user_id = data.get('user_id')
+        url = data.get('url')
+        if not user_id:
+            resp = HttpResponse()
+            resp.status_code = 400
+            return resp
+        user = Profile.objects.get(user_id=user_id)
+        if user:
+            print(url)
+            user.photo_url = url
             user.save()
             return HttpResponse()
         resp = HttpResponse()
