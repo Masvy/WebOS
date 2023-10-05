@@ -1,9 +1,13 @@
+import base64
+
 from django.core import serializers
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http.response import HttpResponse
 from .models import Profile
+from django.core.files.storage import FileSystemStorage
+import os
 import json
 
 
@@ -18,6 +22,7 @@ def main(request):
 def profile(requst):
     return render(requst, 'account/profile.html')
 
+
 def test(requst):
     return render(requst, 'account/test.html')
 
@@ -29,10 +34,9 @@ def save_user(request):
         user_id = data.get('user_id')
         name = data.get('name')
         user_name = data.get('user_name')
-        photo_url = f'/users/{user_id}/profile'
         # Сохраняем код в базу данных
         profile = Profile(user_id=user_id, name=name,
-                          user_name=user_name, photo_url=photo_url)
+                          user_name=user_name)
         profile.save()
 
         return JsonResponse({'message': 'Code saved successfully'}, status=200)
@@ -63,7 +67,7 @@ def get_profile(request):
             return resp
         user: Profile = Profile.objects.get(user_id=user_id)
         if user:
-            js = serializers.serialize('json', [ user, ])
+            js = serializers.serialize('json', [user, ])
             print("\n\n")
             print(js)
             print("\n\n")
@@ -71,6 +75,22 @@ def get_profile(request):
         resp = HttpResponse()
         resp.status_code = 404
         return resp
+
+
+@csrf_exempt
+def get_profile_photo(request):
+    if request.method == 'GET':
+        photo_path = request.GET.get('photo_path')
+        # Check if the file exists
+        if os.path.exists(photo_path):
+            print(photo_path)
+            # Open the file and prepare the response
+            with open(photo_path, 'rb') as file:
+                response = HttpResponse(file.read(), content_type='image/jpeg')  # Adjust the content type as needed
+            return response
+        # If the file does not exist, return an error response
+        return HttpResponse("File not found", status=404)
+
 
 @csrf_exempt
 def put_description(request):
@@ -91,20 +111,27 @@ def put_description(request):
         resp.status_code = 404
         return resp
 
+
 @csrf_exempt
 def put_photo(request):
     if request.method == 'PUT':
         data = json.loads(request.body)
         user_id = data.get('user_id')
-        url = data.get('url')
+        photo_base64 = data.get('file')
+        # Save file to os
+        binary_file_data = base64.b64decode(photo_base64)
+        file_name = f"user_{user_id}_photo.jpg"
+        file_path = os.path.join(os.getcwd(), 'UsersPhoto', file_name)
+        with open(file_path, "wb") as file:
+            file.write(binary_file_data)
+        # Try update DB
         if not user_id:
             resp = HttpResponse()
             resp.status_code = 400
             return resp
         user = Profile.objects.get(user_id=user_id)
         if user:
-            print(url)
-            user.photo_url = url
+            user.photo_url = file_path
             user.save()
             return HttpResponse()
         resp = HttpResponse()

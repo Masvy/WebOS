@@ -2,72 +2,72 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Profile</title>
     <link
-      type="text/css"
-      href="{% static 'account/css/style.css' %}"
-      rel="stylesheet"
+            type="text/css"
+            href="{% static 'account/css/style.css' %}"
+            rel="stylesheet"
     />
-  </head>
-  <body>
-    <div class="basis">
-      <div class="profile--container--log">
+</head>
+<body>
+<div class="basis">
+    <div class="profile--container--log">
         <div class="telegram">Telegram</div>
-        <img id="gif1" src="{% static 'account/img/o_light.gif' %}" alt="o" />
-        <img id="gif2" src="{% static 'account/img/s_light.gif' %}" alt="s" />
-      </div>
-      <div class="photo--container">
+        <img id="gif1" src="{% static 'account/img/o_light.gif' %}" alt="o"/>
+        <img id="gif2" src="{% static 'account/img/s_light.gif' %}" alt="s"/>
+    </div>
+    <div class="photo--container">
         <div
-          class="photo"
-          id="profilePhoto"
-          style="background-image: url('{% static 'account/img/cat.jpg' %}')"
+                class="photo"
+                id="profilePhoto"
+                style="background-image: url('{% static 'account/img/cat.jpg' %}')"
         ></div>
         <div class="grade">
-          <p>5.0</p>
+            <p>5.0</p>
         </div>
-      </div>
-      <div class="name">
+    </div>
+    <div class="name">
         <p id="name">cat_dealereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p>
-      </div>
-      <div class="deals">
+    </div>
+    <div class="deals">
         <p>0 deals</p>
-      </div>
-      <div class="user--name--container">
+    </div>
+    <div class="user--name--container">
         <div class="mail">
-          <div class="mail--icon">
-            <img src="{% static 'account/img/mail.png' %}" alt="mail" />
-          </div>
+            <div class="mail--icon">
+                <img src="{% static 'account/img/mail.png' %}" alt="mail"/>
+            </div>
         </div>
         <div class="wallet">
-          <div class="wallet--icon">
-            <img src="{% static 'account/img/wallet.png' %}" alt="wallet" />
-          </div>
+            <div class="wallet--icon">
+                <img src="{% static 'account/img/wallet.png' %}" alt="wallet"/>
+            </div>
         </div>
         <div class="user--name">
-          <p id="username">UserName</p>
+            <p id="username">UserName</p>
         </div>
         <div class="like">
-          <img src="{% static 'account/img/like.png' %}" alt="like" />
+            <img src="{% static 'account/img/like.png' %}" alt="like"/>
         </div>
-      </div>
-      <div class="desc--profile--container">
+    </div>
+    <div class="desc--profile--container">
         <div class="desc--profile">
           <span id="profileDesc"
-            >short description about me, what I do, and what I can do. The cost
+          >short description about me, what I do, and what I can do. The cost
             of my services. Write to me for details in private messages, and
             after discussion, I’ll provide you with an exclusive payment lot.
             short description about me, what I do, and what I can do. The cost
             of my services.
           </span>
         </div>
-      </div>
-      <div class="edit--container">
+    </div>
+    <div class="edit--container">
         <button
-          onclick="editDescription()"
-          style="
+                onclick="editDescription()"
+                style="
             display: block;
             margin: 0 auto;
             margin-top: 10px;
@@ -79,35 +79,35 @@
             cursor: pointer;
           "
         >
-          Edit
+            Edit
         </button>
-      </div>
-      <div class="button--container">
+    </div>
+    <div class="button--container">
         <div class="all--revievs">
-          <p>all reviews</p>
+            <p>all reviews</p>
         </div>
         <div class="request--payment">
-          <p>request payment</p>
+            <p>request payment</p>
         </div>
-      </div>
-      <div class="experience--container">
-        <div class="experience">
-          <p>0d on the platform.</p>
-        </div>
-      </div>
-      <div class="theme_container">
-        <div class="theme">
-          <a href="#" id="themeToggle">Dark</a>
-        </div>
-      </div>
     </div>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-      let tg = window.Telegram.WebApp;
-      let userId = tg.initDataUnsafe.user.id;
-      const csrf_token = "{{ csrf_token }}";
+    <div class="experience--container">
+        <div class="experience">
+            <p>0d on the platform.</p>
+        </div>
+    </div>
+    <div class="theme_container">
+        <div class="theme">
+            <a href="#" id="themeToggle">Dark</a>
+        </div>
+    </div>
+</div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+    let tg = window.Telegram.WebApp;
+    let userId = tg.initDataUnsafe.user.id;
+    const csrf_token = "{{ csrf_token }}";
 
-      document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
         const themeToggle = document.getElementById("themeToggle");
         const name = document.getElementById("name");
         const userName = document.getElementById("username");
@@ -118,98 +118,115 @@
         var profilePhoto = document.getElementById('profilePhoto');
 
         fetch("/get_profile/?user_id=" + userId, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
         })
-                .then((response) => response.json())
-                .then((data) => {
-                  name.textContent = `${data[0].fields.name}`;
-                  userName.textContent = `@${data[0].fields.user_name}`;
-                  if (data[0].fields.description != undefined) {
+            .then((response) => response.json())
+            .then((data) => {
+                name.textContent = `${data[0].fields.name}`;
+                userName.textContent = `@${data[0].fields.user_name}`;
+                if (data[0].fields.description != undefined) {
                     description.textContent = `${data[0].fields.description}`;
-                  } else {
+                } else {
                     description.textContent = `default description`;
-                  }
-                  //TODO:Load photo
-                  // profilePhoto.style.backgroundImage = `${data[0].fields.photo_url}`;
-                });
+                }
+
+                photo_path = data[0].fields.photo_url;
+                if (photo_path != undefined) {
+                    fetch("/get_profile_photo/?photo_path=" + photo_path, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }).then((response) => response.blob())  // Fetch the image as binary data
+                        .then((imageBlob) => {
+                            const imageUrl = URL.createObjectURL(imageBlob);  // Create a URL for the binary image data
+                            profilePhoto.style.backgroundImage = `url(${imageUrl})`;  // Set the background image
+                        })
+                        .catch((error) => {
+                            console.error('Error fetching or displaying the image:', error);
+                        });
+                }
+            });
 
         function toggleTheme() {
-          const prefersDarkScheme = window.matchMedia(
-                  "(prefers-color-scheme: dark)"
-          );
-          if (prefersDarkScheme.matches) {
-            body.classList.add("dark");
-            body.classList.remove("light");
-            themeToggle.textContent = "Light";
-            gif1.src = "{% static 'account/img/o_dark.gif' %}";
-            gif2.src = "{% static 'account/img/s_dark.gif' %}";
-          } else {
-            body.classList.add("light");
-            body.classList.remove("dark");
-            themeToggle.textContent = "Dark";
-            gif1.src = "{% static 'account/img/o_light.gif' %}";
-            gif2.src = "{% static 'account/img/s_light.gif' %}";
-          }
+            const prefersDarkScheme = window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            );
+            if (prefersDarkScheme.matches) {
+                body.classList.add("dark");
+                body.classList.remove("light");
+                themeToggle.textContent = "Light";
+                gif1.src = "{% static 'account/img/o_dark.gif' %}";
+                gif2.src = "{% static 'account/img/s_dark.gif' %}";
+            } else {
+                body.classList.add("light");
+                body.classList.remove("dark");
+                themeToggle.textContent = "Dark";
+                gif1.src = "{% static 'account/img/o_light.gif' %}";
+                gif2.src = "{% static 'account/img/s_light.gif' %}";
+            }
         }
 
         // Инициализация темы при загрузке страницы
         toggleTheme();
 
         themeToggle.addEventListener("click", function () {
-          body.classList.toggle("dark");
-          body.classList.toggle("light");
-          const currentTheme = body.classList.contains("dark")
-            ? "Light"
-            : "Dark";
-          themeToggle.textContent = `${currentTheme}`;
+            body.classList.toggle("dark");
+            body.classList.toggle("light");
+            const currentTheme = body.classList.contains("dark")
+                ? "Light"
+                : "Dark";
+            themeToggle.textContent = `${currentTheme}`;
 
-          if (currentTheme === "Dark") {
-            gif1.src = "{% static 'account/img/o_light.gif' %}";
-            gif2.src = "{% static 'account/img/s_light.gif' %}";
-          } else {
-            gif1.src = "{% static 'account/img/o_dark.gif' %}";
-            gif2.src = "{% static 'account/img/s_dark.gif' %}";
-          }
+            if (currentTheme === "Dark") {
+                gif1.src = "{% static 'account/img/o_light.gif' %}";
+                gif2.src = "{% static 'account/img/s_light.gif' %}";
+            } else {
+                gif1.src = "{% static 'account/img/o_dark.gif' %}";
+                gif2.src = "{% static 'account/img/s_dark.gif' %}";
+            }
         });
-      });
-      function editDescription() {
+    });
+
+    function editDescription() {
         const profileDesc = document.getElementById("profileDesc");
         const newDescription = prompt(
-          "Enter a new profile description (maximum 512 characters):"
+            "Enter a new profile description (maximum 512 characters):"
         );
 
         if (newDescription !== null && newDescription !== "") {
-          if (newDescription.length <= 512) {
-            profileDesc.textContent = newDescription;
+            if (newDescription.length <= 512) {
+                profileDesc.textContent = newDescription;
 
-            fetch("/put_description/", {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                user_id: userId,
-                description: newDescription,
-              })
-            });
+                fetch("/put_description/", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        description: newDescription,
+                    })
+                });
 
-          } else {
-            alert("Too many characters entered. Maximum 512.");
-          }
+            } else {
+                alert("Too many characters entered. Maximum 512.");
+            }
         }
-      }
-      document.addEventListener("DOMContentLoaded", function () {
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
         var names = document.querySelectorAll(".name p");
         names.forEach(function (name) {
-          if (name.textContent.length > 5) {
-            name.textContent = name.textContent.slice(0, 5) + "...";
-          }
+            if (name.textContent.length > 5) {
+                name.textContent = name.textContent.slice(0, 5) + "...";
+            }
         });
-      });
-    </script>
+    });
+</script>
 <input
         type="file"
         accept="image/*"
@@ -220,21 +237,30 @@
 />
 <script>
     var loadFile = function (event) {
-        // Change the background image of the profile photo
         var profilePhoto = document.getElementById('profilePhoto');
-        var url = 'url(' + URL.createObjectURL(event.target.files[0]) + ')';
+        var photoFile = event.target.files[0];
+        var url = 'url(' + URL.createObjectURL(photoFile) + ')';
         profilePhoto.style.backgroundImage = url;
-        fetch("/put_photo/", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                user_id: userId,
-                url: url,
-            })
-        });
 
+        var reader = new FileReader();
+        reader.onload = function (res) {
+            var fileData = res.target.result.split(',')[1]; // Extract the base64-encoded part
+
+            // Create a JSON object with user_id and base64-encoded file data
+            var jsonData = {
+                user_id: userId,
+                file: fileData
+            };
+
+            fetch("/put_photo/", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(jsonData) // Send the JSON object with base64-encoded file data
+            });
+        }
+        reader.readAsDataURL(photoFile); // Read the file as a data URL
     };
 
     // Add an event listener to the profile photo to trigger file input click
@@ -244,5 +270,5 @@
         fileInput.click();
     });
 </script>
-  </body>
+</body>
 </html>
