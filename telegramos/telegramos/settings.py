@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-bwiyp9v2a@maix(na6!rej_z=e3c3htctqe&r9h2&9c430ua(&
 DEBUG = True
 
 ALLOWED_HOSTS = ['ee1b-46-61-120-37.ngrok-free.app',
-                 'fb34-212-220-212-97.ngrok-free.app', '1b89-46-61-120-37.ngrok-free.app']
+                 'fb34-212-220-212-97.ngrok-free.app', '5c1c-46-61-120-37.ngrok-free.app']
 
 
 # Application definition
