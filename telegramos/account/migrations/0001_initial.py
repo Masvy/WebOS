@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('user_name', models.CharField(max_length=32, null=True)),
                 ('registration_date', models.DateField(auto_now_add=True, null=True)),
                 ('description', models.CharField(max_length=512, null=True)),
-                ('photo_url', models.CharField(max_length=128, null=False))
+                ('photo_url', models.CharField(max_length=512, null=True))
             ],
         ),
     ]
