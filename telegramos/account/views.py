@@ -120,8 +120,8 @@ def put_photo(request):
         photo_base64 = data.get('file')
         # Save file to os
         binary_file_data = base64.b64decode(photo_base64)
-        file_name = 'profile.jpg'
-        file_path = os.path.join(os.getenv('USER_ROOT'), user_id, file_name)
+        file_name = f"user_{user_id}_photo.jpg"
+        file_path = os.path.join(os.getcwd(), 'UsersPhoto', file_name)
         with open(file_path, 'wb') as file:
             file.write(binary_file_data)
         # Try update DB
